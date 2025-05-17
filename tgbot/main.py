@@ -26,10 +26,10 @@ class TGBot:
 
     async def send_message(self, message: str):
         pool = await asyncpg.create_pool(connection_string)
-            async with pool.acquire() as conn:
-                # Execute a statement to create a new table.
-                users = await conn.fetch("SELECT \"user\" FROM users")
-                print(users)
+        async with pool.acquire() as conn:
+            # Execute a statement to create a new table.
+            users = await conn.fetch("SELECT \"user\" FROM users")
+            print(users)
         await pool.close()
         await self.bot(
     async def update_bot(self, update: dict) -> None:
