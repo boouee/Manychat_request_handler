@@ -5,6 +5,7 @@ app = FastAPI()
 
 @app.post('/api/bot')
 async def tgbot_webhook_route(request: Request):
+    print(request, request.body()))
     update_dict = await request.json()
     print(update_dict)
     await tgbot.update_bot(update_dict)
