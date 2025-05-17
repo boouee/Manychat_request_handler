@@ -1,4 +1,4 @@
-jimport asyncio
+import asyncio
 import asyncpg
 from aiogram import Bot, Dispatcher, Router
 from aiogram.filters import Command, CommandStart
