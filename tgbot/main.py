@@ -1,7 +1,12 @@
 import asyncio
 from aiogram import Bot, Dispatcher, Router
-from tgbot.handlers import router
+from aiogram.types import Message
+#from tgbot.handlers import router
 
+router = Router(name=__name__)
+@router.message()
+async def message_handler(message: Message) -> Any:
+    await message.answer('Hello from my router!')
 class TGBot:
     def __init__(self, router: Router) -> None:
        token = config('TOKEN')
