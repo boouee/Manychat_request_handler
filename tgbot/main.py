@@ -14,7 +14,7 @@ async def process_start_command(message: Message):
     pool = await asyncpg.create_pool(connection_string)
     async with pool.acquire() as conn:
     # Execute a statement to create a new table.
-        await conn.execute("INSERT INTO users VALUES('" + str(message.from_user.id) + "')")
+        await conn.execute("INSERT INTO users (user) VALUES('" + str(message.from_user.id) + "')")
     await pool.close()
     await message.answer('/start')
 class TGBot:
