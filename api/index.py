@@ -11,3 +11,8 @@ async def tgbot_webhook_route(request: Request):
     print(update_dict)
     await tgbot.update_bot(update_dict)
     return ''
+
+@app.post('/api/message')
+async def send_message(request: Request):
+    await tgbot.send_message('A message sent')
+    return 
