@@ -31,7 +31,7 @@ class TGBot:
             users = await conn.fetch("SELECT \"user\" FROM users")
             print(users)
         await pool.close()
-        await self.bot(
+        #await self.bot(
     async def update_bot(self, update: dict) -> None:
         await self.dp.feed_raw_update(self.bot, update)
         await self.bot.session.close()
