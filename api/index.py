@@ -16,3 +16,8 @@ async def tgbot_webhook_route(request: Request):
 async def send_message(request: Request):
     await tgbot.send_message('A message sent')
     return 
+
+@app.get('/api/message')
+async def send_message(request: Request):
+    #await tgbot.send_message('A message sent')
+    return "hello"
