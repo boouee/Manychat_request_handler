@@ -15,7 +15,7 @@ async def tgbot_webhook_route(request: Request):
 @app.post('/api/message', status_code='500')
 async def send_message(request: Request):
     body = await request.body()
-    print(request, body)
+    print(request, body.decode())
     #update_dict = await request.json()
     #print(update_dict)
     await tgbot.send_message('A message sent')
