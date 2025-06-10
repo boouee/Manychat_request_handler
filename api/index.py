@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from tgbot.main import tgbot
+from urllib.parse import unquote
 
 app = FastAPI()
 
@@ -15,7 +16,7 @@ async def tgbot_webhook_route(request: Request):
 @app.post('/api/message', status_code='500')
 async def send_message(request: Request):
     body = await request.body()
-    print(request, body.decode())
+    print(request, unquote(body.decode()))
     #update_dict = await request.json()
     #print(update_dict)
     await tgbot.send_message('A message sent')
