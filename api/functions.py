@@ -12,7 +12,7 @@ def chat_code(request):
   code = '|'.join(data.values())
   return code
 
-def chat_id(code):
+async def chat_id(code):
   async with httpx.AsyncClient() as client:
     data = {"USER_CODE": code}
     response = await client.post('https://b24-dqlsji.bitrix24.ru/rest/1/18zmjgd33yujg5bx/imopenlines.session.open', data=data)
