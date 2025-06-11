@@ -3,6 +3,7 @@ import httpx
 import re
 import asyncio
 import asyncpg
+import time
 
 connection_string = 'postgresql://neondb_owner:npg_rzqOTvaJiP01@ep-frosty-morning-a2z2rgqi-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require'
 
@@ -24,15 +25,16 @@ async def chat_id(code):
     
 async def record_time(chat):
     pool = await asyncpg.create_pool(connection_string)
-    statement = """
+    timestamp = str(time.time())
+    statement = f"""
       INSERT INTO chats (id, time)
-      VALUES ({chat}, {timestamp})
+      VALUES ('{chat}', '{timestamp}')
       ON CONFLICT (id)
-      DO NOTHING | DO UPDATE SET id = {chat}, time = {timestamp};
+      DO NOTHING | DO UPDATE SET id = '{chat}', time = '{timestamp}';
       """
     async with pool.acquire() as conn:
     # Execute a statement to create a new table.
-        await conn.execute("INSERT INTO users (\"user\") VALUES('" + str(message.from_user.id) + "')")
+        await conn.execute(statement)
     await pool.close()  
 #def find(array, term):
   #for i in array:
