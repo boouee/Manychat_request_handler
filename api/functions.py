@@ -3,7 +3,7 @@ import re
 
 def chat_code(request):
   data = {}
-  request = unquote(request).split()
+  request = unquote(request)
   data['connector'] = re.search('\[connector_id\]=(.+?)&', request).group(1)
   data['line'] = re.search('\[line_id\]=(.+?)&', request).group(1)
   data['chat'] = re.search('\[chat_id\]=(.+?)&', request).group(1)
