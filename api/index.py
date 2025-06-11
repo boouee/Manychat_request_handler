@@ -7,6 +7,7 @@ app = FastAPI()
 @app.post('/api/message')
 async def send_message(request: Request):
     body = await request.body()
+    print('2nd branch deployment working..')
     print(request, unquote(body.decode()))
     print(urlparse(body.decode()))
     #update_dict = await request.json()
