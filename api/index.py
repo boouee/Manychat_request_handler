@@ -19,7 +19,7 @@ async def send_message(request: Request):
     body = await request.body()
     print(request, unquote(body.decode()))
     print(urlparse(body.decode()))
-    print(chat_code(unquote(body.decode())))
+    print(chat_code(body.decode()))
     #update_dict = await request.json()
     #print(update_dict)
     await tgbot.send_message('A message sent')
