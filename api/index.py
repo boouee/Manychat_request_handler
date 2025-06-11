@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from tgbot.main import tgbot
+#from tgbot.main import tgbot
 from urllib.parse import unquote, urlparse
 
 app = FastAPI()
