@@ -20,7 +20,7 @@ async def send_message(request: Request):
     print(request, unquote(body.decode()))
     print(urlparse(body.decode()))
     try:
-        print(chat_code(body.decode()))
+        print(chat_code(str(body.decode())))
     except Exception as e:
         print(e)
     #update_dict = await request.json()
