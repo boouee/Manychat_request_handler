@@ -24,7 +24,7 @@ async def update_leads():
     status = os.getenv("source_status")
     target = os.getenv("target_status")
     #connection_string = 'postgresql://neondb_owner:npg_rzqOTvaJiP01@ep-frosty-morning-a2z2rgqi-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require'
-    headers = {"Authentification": f"Bearer {key}"}
+    headers = {"Authentification": f"Bearer {key}", "Content-Type":"application/json"}
     
     hour = time.gmtime().tm_hour + 3
     if hour > 0 and hour < 30:
