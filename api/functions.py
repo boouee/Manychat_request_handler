@@ -4,38 +4,17 @@ import re
 import asyncio
 import asyncpg
 import time
+import os
+#import redis
+from dotenv import load_dotenv
 
-connection_string = 'postgresql://neondb_owner:npg_rzqOTvaJiP01@ep-frosty-morning-a2z2rgqi-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require'
+load_dotenv(dotenv_path=".env")
+api = os.getenv("api")
+#connection_string = 'postgresql://neondb_owner:npg_rzqOTvaJiP01@ep-frosty-morning-a2z2rgqi-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require'
 
-def chat_code(request):
-  data = {}
-  request = unquote(request)
-  data['connector'] = re.search('\[connector_id\]=(.+?)&', request).group(1)
-  data['line'] = re.search('\[line_id\]=(.+?)&', request).group(1)
-  data['chat'] = re.search('\[chat_id\]=(.+?)&', request).group(1)
-  data['user'] = re.search('data\[DATA\]\[connector\]\[user_id\]=(.+?)&', request).group(1)
-  code = '|'.join(data.values())
-  return code
-
-async def chat_id(code):
-  async with httpx.AsyncClient() as client:
-    data = {"USER_CODE": code}
-    response = await client.post('https://b24-dqlsji.bitrix24.ru/rest/1/s8xdt6lup9f63cj2/imopenlines.session.open', data=data)
-    return response.json()
-    
-async def record_time(chat):
-    pool = await asyncpg.create_pool(connection_string)
-    timestamp = str(time.time())
-    statement = f"""
-      INSERT INTO chats (id, time)
-      VALUES ('{chat}', '{timestamp}')
-      ON CONFLICT (id)
-      DO NOTHING | DO UPDATE SET id = '{chat}', time = '{timestamp}';
-      """
-    async with pool.acquire() as conn:
-    # Execute a statement to create a new table.
-        await conn.execute(statement)
-    await pool.close()  
-#def find(array, term):
-  #for i in array:
-    #if 
+async def get_lead():
+    url = f"{url}leads?filter[statuses][0][pipeline_id]={pipeline}&filter[statuses][0][status_id]={status}"
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+        json = response.json()
+        
