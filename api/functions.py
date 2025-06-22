@@ -29,7 +29,7 @@ async def update_leads():
     hour = time.gmtime().tm_hour + 3
     if hour > 0 and hour < 30:
         lead = await get_lead()
-        #await change_status(lead)
+        await change_status(lead)
         
 async def get_lead():
     #print("url: ", url).
