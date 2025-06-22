@@ -4,7 +4,7 @@ from api.functions import update_leads
 
 app = FastAPI()
 
-@app.post('/api/update')
+@app.get('/api/update')
 async def update(request: Request):
     try:
         await update_leads()
