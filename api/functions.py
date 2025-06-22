@@ -19,9 +19,9 @@ headers = {"Authentification": f"Bearer {key}"}
     
 async def update_leads():
     hour = time.gmtime().tm_hour + 3
-    if hour > 8 and hour < 18:
+    if hour > 0 and hour < 30:
         lead = await get_lead()
-        await change_status(lead)
+        #await change_status(lead)
         
 async def get_lead():
     url = f"{url}leads?filter[statuses][0][pipeline_id]={pipeline}&filter[statuses][0][status_id]={status}"
@@ -29,6 +29,7 @@ async def get_lead():
         response = await client.get(url,headers=headers)
         json = response.json()
         lead = json["_embedded"]["leads"][0]["id"]
+        print("lead: ", lead)
         return lead
 
 async def change_status(lead):
@@ -36,4 +37,5 @@ async def change_status(lead):
     async with httpx.AsyncClient() as client:
         data = {"status_id": target}
         response = await client.patch(url, data=data,headers=headers)
-        json = response.json()    
+        json = response.json()   
+        print("response: ", json)
