@@ -44,6 +44,7 @@ async def get_lead():
         return lead
 
 async def change_status(lead):
+    url = os.getenv("url")
     url = f"{url}leads/{lead}"
     async with httpx.AsyncClient() as client:
         data = {"status_id": target}
