@@ -32,7 +32,8 @@ async def update_leads():
         #await change_status(lead)
         
 async def get_lead():
-    #print("url: ", url)
+    #print("url: ", url).
+    print(key)
     url = os.getenv("url")
     url = f"{url}leads?filter[statuses][0][pipeline_id]={pipeline}&filter[statuses][0][status_id]={status}"
     async with httpx.AsyncClient() as client:
