@@ -47,7 +47,7 @@ async def change_status(lead):
     url = os.getenv("url")
     url = f"{url}leads/{lead}"
     async with httpx.AsyncClient() as client:
-        data = {"status_id": int(target)}
+        data = {"status_id": 123}#int(target)}
         print(data)
         response = await client.patch(url, data=data,headers=headers)
         json = response.json()   
