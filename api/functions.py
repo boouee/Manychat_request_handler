@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=".env")
 url = os.getenv("url")
-key = os.getenv("url")
+key = os.getenv("key")
 pipeline = os.getenv("pipeline")
 status = os.getenv("source_status")
 target = os.getenv("target_status")
