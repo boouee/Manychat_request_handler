@@ -23,5 +23,8 @@ async def get_lead():
         return lead
 
 async def change_status(lead):
-    
-        
+    url = f"{url}leads/{lead}"
+    async with httpx.AsyncClient() as client:
+        data = {"status_id": target}
+        response = await client.patch(url, data=data)
+        json = response.json()    
