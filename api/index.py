@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from api.functions import update_leads
+from api.functions import update_leads, url, key, pipeline, status, target, headers
 #from urllib.parse import unquote, urlparse
 
 app = FastAPI()
