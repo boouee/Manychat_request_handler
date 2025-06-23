@@ -5,9 +5,14 @@ from api.functions import update_leads, url, key, pipeline, status, target, head
 app = FastAPI()
 
 @app.get('/api/update')
-async def update(request: Request):
+async def update(request: Request, days: str = 'none'):
+    if days == 'none':
+        days = []
+    else:
+        days = days.split('_')
+    
     try:
-        await update_leads()
+        await update_leads(days)
     except Exception as e:
         print("Exception: ", e)
 
