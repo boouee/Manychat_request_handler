@@ -29,7 +29,7 @@ async def update_leads(days):
     day = str(date.today().isoweekday())
     print('day: ', day)
     hour = time.gmtime().tm_hour + 3
-    if hour > 9 and hour < 30 and day in days:
+    if hour > 9 and hour < 30 and not(day in days):
         lead = await get_lead()
         await change_status(lead)
         
