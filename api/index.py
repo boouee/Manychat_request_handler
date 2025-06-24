@@ -1,18 +1,12 @@
 from fastapi import FastAPI, Request
-from api.functions import update_leads, url, key, pipeline, status, target, headers
+from api.functions import request_handler
 #from urllib.parse import unquote, urlparse
 
 app = FastAPI()
 
-@app.get('/api/update')
-async def update(request: Request, days: str = 'none'):
-    if days == 'none':
-        days = []
-    else:
-        days = days.split('_')
+@app.get('/api/send')
+async def update(request: Request, id: str = 'none'):
+    if id != 'none':
+        await request_handler(id)
     
-    try:
-        await update_leads(days)
-    except Exception as e:
-        print("Exception: ", e)
 
