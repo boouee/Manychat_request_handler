@@ -38,7 +38,9 @@ async def send_to_notion(client, data):
 	    tags.append(tag["name"])
     for key in data:
 	    if type(data[key]) == "str":
-		    if re.search("\{\{.*\}\}", data[key]):
+		    print(data[key])
+		    match = re.search("\{\{.*\}\}", data[key])
+		    if match:
 			    data[key]= ""
     body = {
 	"parent": {
