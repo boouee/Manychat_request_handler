@@ -9,7 +9,7 @@ async def update(request: Request, id: str = 'none', tg_username: str = ""):
     print(id)
     if id != 'none':
         try:
-            await request_handler(id)
+            await request_handler(id, tg_username)
         except Exception as e:
             print("Exception: ", e)
 
