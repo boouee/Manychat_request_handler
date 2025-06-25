@@ -22,4 +22,71 @@ async def get_info(client, id):
     return json["data"]
 
 async def send(client, data):
-  
+    body =
+    {
+	"parent": {
+		"database_id": "216f9e1574dc80319339d190a046d01d"
+	},
+	"icon": {
+		"emoji": "🥬"
+	},
+	"cover": {
+		"external": {
+			"url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Tuscankale.jpg"
+		}
+	},
+	"properties": {
+		"Telegram": {
+			"rich_text": [
+				{
+					"text": {
+						"content": f"{tg_username}"
+					}
+				}
+			]
+		},
+		"User fields": {
+			"rich_text": [
+				{
+					"text": {
+						"content": 
+					}
+				}
+			]
+		},
+		"Tags": {
+			"rich_text": [
+				{
+					"text": {
+						"content": ""
+					}
+				}
+			]
+		},
+		"Instagram": {
+			"rich_text": [
+				{
+					"text": {
+						"content": f"{ig_username}"
+					}
+				}
+			]
+		},
+		"Email": {
+			"email": f"{email}"
+		},
+		"Телефон": {
+			"phone_number": f"{phone}"
+		},
+		"Имя": {
+			"title": [
+				{
+					"type": "text",
+					"text": {
+						"content": f"{full_name}"
+					}
+				}
+			]
+		}
+	}
+}
