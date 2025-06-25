@@ -30,6 +30,12 @@ async def send_to_notion(client, data):
     key = os.getenv("notion_token")
     url = 'https://api.notion.com/v1/pages'
     headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {key}"}
+    user_fields = []
+    tags = []
+    for field in data["custom_fields"]:
+	    user_fields.append(f'{field["name"]}: {field["value"]}')
+    for tag in data["tags"]:
+	    tags.append(tag["name"])
     body =
     {
 	"parent": {
@@ -57,7 +63,7 @@ async def send_to_notion(client, data):
 			"rich_text": [
 				{
 					"text": {
-						"content": 
+						"content": '; '.join(user_fields)
 					}
 				}
 			]
@@ -66,7 +72,7 @@ async def send_to_notion(client, data):
 			"rich_text": [
 				{
 					"text": {
-						"content": ""
+						"content": ', '.join(tags)
 					}
 				}
 			]
