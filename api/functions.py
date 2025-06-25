@@ -13,7 +13,7 @@ async def request_handler(id, tg_username):
     async with httpx.AsyncClient() as client:
         data = await get_info(client, id)
         data["tg_username"] = tg_username
-        await send_data(client, data)
+        await send_to_notion(client, data)
 
 async def get_info(client, id):
     load_dotenv()
