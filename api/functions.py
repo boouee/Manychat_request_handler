@@ -19,9 +19,12 @@ async def get_info(client, id):
     url = f'https://api.manychat.com/fb/subscriber/getinfo?subscriber_id={id}'
     response = await client.get(url,headers=headers)
     json = response.json()
+    print(json)
     return json["data"]
 
-async def send(client, data):
+async def send_to_notion(client, data):
+    url = 'https://api.notion.com/v1/pages'
+    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {notion_key}"}
     body =
     {
 	"parent": {
@@ -40,7 +43,7 @@ async def send(client, data):
 			"rich_text": [
 				{
 					"text": {
-						"content": f"{tg_username}"
+						"content": f"{data['tg_username']}"
 					}
 				}
 			]
@@ -67,26 +70,29 @@ async def send(client, data):
 			"rich_text": [
 				{
 					"text": {
-						"content": f"{ig_username}"
+						"content": f"{data['ig_username']}"
 					}
 				}
 			]
 		},
 		"Email": {
-			"email": f"{email}"
+			"email": f"{data['email']}"
 		},
 		"Телефон": {
-			"phone_number": f"{phone}"
+			"phone_number": f"{data['phone']}"
 		},
 		"Имя": {
 			"title": [
 				{
 					"type": "text",
 					"text": {
-						"content": f"{full_name}"
+						"content": f"{data['full_name']}"
 					}
 				}
 			]
 		}
 	}
-}
+    }
+    response = await client.post(url,headers=headers, data=body)
+    json = response.json()
+    print(json)
