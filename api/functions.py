@@ -40,6 +40,7 @@ async def send_to_notion(client, data):
 	    if type(data[key]) == "str":
 		    print(data[key])
 		    match = re.search("\{\{.*\}\}", data[key])
+		    print(match)
 		    if match:
 			    data[key]= ""
     body = {
