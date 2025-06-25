@@ -103,9 +103,9 @@ async def send_to_notion(client, data):
 		}
 	}
     }
-    try:
-         response = await client.post(url,headers=headers, json=body) 
-    except Exception as e:
-	 print("e: ", e)
+    #try:
+    response = await client.post(url,headers=headers, json=body) 
+    #except Exception as e:
+    #print("e: ", e)
     json = response.json()
     print(json)
