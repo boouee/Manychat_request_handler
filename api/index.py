@@ -8,6 +8,8 @@ app = FastAPI()
 async def update(request: Request, id: str = 'none', tg_username: str = ""):
     print(id)
     if id != 'none':
-        await request_handler(id)
-    
+        try:
+            await request_handler(id)
+        except Exception as e:
+            print("Exception: ", e)
 
