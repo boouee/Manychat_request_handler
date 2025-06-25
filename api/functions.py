@@ -13,10 +13,8 @@ async def request_handler(id, tg_username):
     async with httpx.AsyncClient() as client:
         data = await get_info(client, id)
         data["tg_username"] = tg_username
-        try:
-            await send_to_notion(client, data)
-	except Exception as e:
-	    print("send_to_notion: ", e)
+        await send_to_notion(client, data)
+	
 async def get_info(client, id):
     load_dotenv()
     key = os.getenv("manychat_token")
@@ -38,7 +36,7 @@ async def send_to_notion(client, data):
 	    user_fields.append(f'{field["name"]}: {field["value"]}')
     for tag in data["tags"]:
 	    tags.append(tag["name"])
-    body = ''' {
+    body = {
 	"parent": {
 		"database_id": "216f9e1574dc80319339d190a046d01d"
 	},
@@ -104,7 +102,10 @@ async def send_to_notion(client, data):
 			]
 		}
 	}
-    }'''
-    response = await client.post(url,headers=headers, data=body)
+    }
+    try:
+        response = await client.post(url,headers=headers, json=body) 
+    except Exception as e:
+	print("e: ", e)
     json = response.json()
     print(json)
