@@ -36,6 +36,10 @@ async def send_to_notion(client, data):
 	    user_fields.append(f'{field["name"]}: {field["value"]}')
     for tag in data["tags"]:
 	    tags.append(tag["name"])
+    for value in data.values():
+	    if type(value) == "str":
+		 if re.search("\{\{.*\}\}", value):
+			 value = ""
     body = {
 	"parent": {
 		"database_id": "216f9e1574dc80319339d190a046d01d"
