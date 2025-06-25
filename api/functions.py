@@ -16,6 +16,9 @@ async def request_handler(id, tg_username):
         await send_data(client, data)
 
 async def get_info(client, id):
+    load_dotenv()
+    key = os.getenv("manychat_token")
+    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {key}"}
     url = f'https://api.manychat.com/fb/subscriber/getinfo?subscriber_id={id}'
     response = await client.get(url,headers=headers)
     json = response.json()
@@ -23,8 +26,10 @@ async def get_info(client, id):
     return json["data"]
 
 async def send_to_notion(client, data):
+    load_dotenv()
+    key = os.getenv("notion_token")
     url = 'https://api.notion.com/v1/pages'
-    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {notion_key}"}
+    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {key}"}
     body =
     {
 	"parent": {
@@ -86,7 +91,7 @@ async def send_to_notion(client, data):
 				{
 					"type": "text",
 					"text": {
-						"content": f"{data['full_name']}"
+						"content": f"{data['name']}"
 					}
 				}
 			]
