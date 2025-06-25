@@ -11,11 +11,11 @@ from dotenv import load_dotenv
         
 async def request_handler(id, tg_username):
     async with httpx.AsyncClient() as client:
-         data = await get_info(client, id)
-         data["tg_username"] = tg_username
-         try:
+        data = await get_info(client, id)
+        data["tg_username"] = tg_username
+        try:
             await send_to_notion(client, data)
-	 except Exception as e:
+	except Exception as e:
 	    print("send_to_notion: ", e)
 async def get_info(client, id):
     load_dotenv()
@@ -38,7 +38,7 @@ async def send_to_notion(client, data):
 	    user_fields.append(f'{field["name"]}: {field["value"]}')
     for tag in data["tags"]:
 	    tags.append(tag["name"])
-    body = {
+    body = ''' {
 	"parent": {
 		"database_id": "216f9e1574dc80319339d190a046d01d"
 	},
@@ -104,7 +104,7 @@ async def send_to_notion(client, data):
 			]
 		}
 	}
-    }
+    }'''
     response = await client.post(url,headers=headers, data=body)
     json = response.json()
     print(json)
