@@ -37,7 +37,7 @@ async def send_to_notion(client, data):
     for tag in data["tags"]:
 	    tags.append(tag["name"])
     for key in data:
-	    if type(data[key]) == "str":
+	    if type(data[key]) is str:
 		    print(data[key])
 		    match = re.search("\{\{.*\}\}", data[key])
 		    print(match)
