@@ -41,7 +41,7 @@ async def send_to_notion(client, data):
 		    print(data[key])
 		    match = re.search("\{\{.*\}\}", data[key])
 		    print(match)
-		    if match or data[key]=="None":
+		    if match or data[key]==None:
 			    data[key]= ""
     body = {
 	"parent": {
