@@ -35,7 +35,7 @@ async def send_to_notion(client, data):
     keys = ['phone', 'ig_username', 'email', 'name'] 
     for key in keys:
 	    if data[key] is None:
-		    data[key] = ""
+		    data[key] = null
     for field in data["custom_fields"]:
 	    user_fields.append(f'{field["name"]}: {field["value"]}')
     for tag in data["tags"]:
