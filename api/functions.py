@@ -17,8 +17,8 @@ async def request_handler(id, tg_username):
 	
 async def get_info(client, id):
     load_dotenv()
-    key = os.getenv("manychat_token")
-    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {key}"}
+    token = os.getenv("manychat_token")
+    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {token}"}
     url = f'https://api.manychat.com/fb/subscriber/getinfo?subscriber_id={id}'
     response = await client.get(url,headers=headers)
     json = response.json()
@@ -27,11 +27,15 @@ async def get_info(client, id):
 
 async def send_to_notion(client, data):
     load_dotenv()
-    key = os.getenv("notion_token")
+    token = os.getenv("notion_token")
     url = 'https://api.notion.com/v1/pages'
-    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {key}"}
+    headers = {"Notion-Version":"2022-06-28", "Authorization": f"Bearer {token}"}
     user_fields = []
     tags = []
+    keys = ['phone', 'ig_username', 'email', 'name'] 
+    for key in keys:
+	    if data[key] is None:
+		    data[key] = ""
     for field in data["custom_fields"]:
 	    user_fields.append(f'{field["name"]}: {field["value"]}')
     for tag in data["tags"]:
@@ -41,10 +45,9 @@ async def send_to_notion(client, data):
 		    print(data[key])
 		    match = re.search("\{\{.*\}\}", data[key])
 		    print(match)
-		    if match or data[key] is None:
+		    if match:
 			    data[key]= ""
-	    elif data[key] is None:
-		    data[key]= ""
+	    
     body = {
 	"parent": {
 		"database_id": "216f9e1574dc80319339d190a046d01d"
