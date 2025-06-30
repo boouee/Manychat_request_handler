@@ -43,6 +43,8 @@ async def send_to_notion(client, data):
 		    print(match)
 		    if match or data[key] is None:
 			    data[key]= ""
+	    elif data[key] is None:
+		    data[key]= ""
     body = {
 	"parent": {
 		"database_id": "216f9e1574dc80319339d190a046d01d"
