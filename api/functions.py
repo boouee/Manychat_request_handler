@@ -52,14 +52,7 @@ async def send_to_notion(client, data):
 	"parent": {
 		"database_id": "216f9e1574dc80319339d190a046d01d"
 	},
-	"icon": {
-		"emoji": "🥬"
-	},
-	"cover": {
-		"external": {
-			"url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Tuscankale.jpg"
-		}
-	},
+	
 	"properties": {
 		"Telegram": {
 			"rich_text": [
